@@ -10,14 +10,16 @@ def open_browser():
     browser.config.hold_browser_open = True
     browser.open('https://google.com/ncr')
     yield browser
-    browser.quit()
+    # browser.quit()
 
 
 def test_find_selene(open_browser):
     browser.element('[name="q"]').should(be.blank).type('selene').press_enter()
-    browser.element('[id="search"]').should(have.text('Selene - User-oriented Web UI browser tests in Python'))
+    result = browser.element('[id="search"]').should(have.text('Selene - User-oriented Web UI browser tests in Python'))
+    assert result
 
 
 def test_negative_search(open_browser):
     browser.element('[name="q"]').clear().type('dflkjfgklj').press_enter()
-    browser.element('body').should(have.text('No results containing all your search terms were found'))
+    result = browser.element('[id="search"]').should(have.text('Selene - User-oriented Web UI browser tests in Python'))
+    assert not result
