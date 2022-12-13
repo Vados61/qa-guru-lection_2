@@ -9,7 +9,7 @@ def open_browser():
     browser.config.window_height = 500
     browser.config.hold_browser_open = True
     browser.open('https://google.com/ncr')
-    yield browser
+    yield
     browser.quit()
 
 
